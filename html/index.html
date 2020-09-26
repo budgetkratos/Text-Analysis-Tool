@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Notary - Book Analysis</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/js/SearchString.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <!-- MAIN CONTENT AREA-->
+            <!-- col md 8 is a BOOTSTRAP CLASS
+            
+            md is also telling the grid, when to stack the columns if the view becomes too small-->
+            <div class="col-md-8">
+                <img src="/img/NotoryLogowhiteMed.png" alt="Logo of the website" class="responsive">
+
+                <!-- mb-4 class is a margin bottom of 4 in BOOTSTRAP-->
+                <div class="card mb-4">
+                    <h2 class="card-header" id="filename">Book Title</h2>
+                    <div class="card-body">
+                        <div class="displayBox scrollBox" id="fileContent">Select a book on the right</div>
+                    </div>
+
+                    <div class="card-footer text-muted">
+                        <a href="#">Just a blank link</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SIDEBAR area-->
+            <div class="col-md-4">
+                <!-- SEARCH WIDGET
+                CLASS my-4 is a bootstrap class for margin of 4-->
+
+                <div class="card my-4">
+                    <h5 class="card-header">
+                        Search
+                    </h5>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="" id="keyword" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" type="button" onclick="PerformMark();">Search</button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="card-footer" id="searchstat">
+                        <!-- this is left blank because we will insert innerHTML with JS to show how many matches it found-->
+                    </div>
+                </div>
+
+                <!-- SELECT A BOOK WIDGET-->
+
+                <div class="card my-4">
+                    <h5 class="card-header">Select a Book</h5>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#"
+                                            onclick="LoadBook('JekyllAndHyde.txt', 'Dr. Jekyll and Mr. Hyde')">Dr.
+                                            Jekyll And Mr. Hyde</a></li>
+                                    <li><a href="#"
+                                            onclick="LoadBook('AliceInWonderland.txt', 'Alice In Wonderland')">Alice in
+                                            Wonderland</a></li>
+                                    <li><a href="#" onclick="LoadBook('LOTR.txt', 'Lord Of The Rings')">Lord Of The
+                                            Rings</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MOST USED WORDS-->
+                <div class="card my-4">
+                    <h5 class="card-header">Most Used Words</h5>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="list-unstyled mb-0" id="mostUsed">
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LEAST USED WORDS-->
+
+                <div class="card my-4">
+                    <h5 class="card-header">Least Used Words</h5>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="list-unstyled mb-0" id="leastUsed">
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--DOCUMENT STATS-->
+
+                <div class="card my-4">
+                    <h5 class="card-header">Document Stats</h5>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="list-unstyled mb-0" id="mostUsed">
+                                    <li id="docLength"></li>
+                                    <li id="wordCount"></li>
+                                    <li id="charCount"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- THIS IS OUR TEMPLATE FOR INJECTING THE TOP 5 USED AND TOP 5 LEAST USED WORDS.. type text/template is there so the HTML ignores it because it doesn't exist-->
+    <script id="template-ul-items" type="text/template">
+        <li>{{val}}</li>
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
